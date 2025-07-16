@@ -2,7 +2,7 @@
 import { getI18N } from "@/i18n";
 import CardDocuments from "../components/CardDocuments.astro";
 import NoDataCard from "../components/NoDataCard.astro";
-import { cardsData } from "../data/bookmarks.js";
+import { cardsData } from "../data/invoices.js";
 
 // const cardsData: any[] = [];
 //Para cambiar idioma de textos
@@ -26,8 +26,8 @@ const i18n = getI18N({ currentLocale });
       ))
     ) : (
       <NoDataCard
-        message={i18n.BOOKSMARKS.empty.message}
-        subtitle={i18n.BOOKSMARKS.empty.message2}
+        message={i18n.DELIVERY.empty.message}
+        subtitle={i18n.DELIVERY.empty.message2}
         imageSrc="/img/notion/white/my-notion-face-transparent_9.png"
       />
     )

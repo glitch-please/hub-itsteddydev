@@ -1,6 +1,11 @@
 /** @type {import('tailwindcss').Config} */
+import flowbite from 'flowbite/plugin';
+
 export default {
-	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+	content: [
+		'./src/**/*.{astro,js,ts,jsx,tsx,vue,svelte}',
+		'./node_modules/flowbite/**/*.js',
+	],
 	darkMode: 'class', // Esto permite usar 'dark:' en clases
 	theme: {
 		extend: {
@@ -13,7 +18,6 @@ export default {
 			},
 
 			fontSize: {
-
 				// #### Body Copy
 				"body": "14px",
 
@@ -42,6 +46,9 @@ export default {
 		},
 
 	},
-	plugins: [require('tailwindcss-animate')],
+	plugins: [
+		flowbite,
+		require('tailwindcss-animate')
+	],
 
 }

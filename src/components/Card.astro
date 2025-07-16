@@ -9,6 +9,7 @@ const i18n = getI18N({ currentLocale });
 
 const {
   id = "",
+  icon = "",
   url = "",
   href = "#",
   title = "Título predeterminado",
@@ -16,6 +17,8 @@ const {
   imageSrc = "",
   imageAlt = "Ícono predeterminado",
   isNew = false, // Nueva prop para controlar el badge
+  isViewed = false,
+  isLate = false,
 } = Astro.props;
 ---
 
@@ -35,17 +38,30 @@ const {
 >
   <!-- Badge de "New" -->
   {
-    isNew && (
+    isNew && !isViewed && (
       <div
         class=" animate-pulse absolute top-0 right-2 transform translate-x-1/2 -translate-y-1/2 bg-sky-500
        text-white 
        text-xs 
        font-semibold px-2 py-0.5 rounded-full shadow-md z-10"
       >
-        {i18n.PROJECTS.BADGE.NEW}
+        {i18n.SUBMITTALS.BADGE.NEW}
       </div>
     )
   }
+
+{
+  isLate && (
+    <div
+      class=" animate-pulse absolute top-0 right-2 transform translate-x-1/2 -translate-y-1/2 bg-red-500
+     text-white 
+     text-xs 
+     font-semibold px-2 py-0.5 rounded-full shadow-md z-10"
+    >
+      {i18n.SUBMITTALS.BADGE.LATE}
+    </div>
+  )
+}
 
   <!-- Contenedor izquierdo -->
   <div class="flex items-center">
@@ -56,7 +72,8 @@ const {
       dark:bg-hub-background
       overflow-hidden"
     >
-      <img src={imageSrc} alt={imageAlt} class="w-full h-full object-cover" />
+    <i class={icon}></i>
+      <!-- <img src={imageSrc} alt={imageAlt} class="w-full h-full object-cover" /> -->
     </div>
 
     <div class="pl-4 flex flex-col justify-start">
@@ -64,7 +81,7 @@ const {
         {title}
       </h2>
       <small class="text-hub-subtitle dark:text-hub-subtitle-dark text-xs"
-        >{url}</small
+        >{subtitle}</small
       >
     </div>
   </div>

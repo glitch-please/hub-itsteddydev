@@ -1,6 +1,6 @@
 ---
-import Card from "../components/Card.astro";
-import { cardsData } from "../data/projects.js";
+import Acrobat from "../components/Acrobat.astro";
+import { cardsData } from "../data/submittals.js";
 import NoDataCard from "../components/NoDataCard.astro";
 import { getI18N } from "@/i18n";
 
@@ -9,26 +9,29 @@ import { getI18N } from "@/i18n";
 const { currentLocale } = Astro;
 const i18n = getI18N({ currentLocale });
 ---
+<div id="accordion-collapse" data-accordion="collapse">
 
-<div class="flex flex-col gap-y-3">
   {
     cardsData.length > 0 ? (
       cardsData.map((card) => (
-        <Card
+        <Acrobat
+          i=index
           id={card.id}
           url={card.url}
           href={card.href}
           title={card.title}
           isNew={card.isNew}
+          isViewed={card.isViewed}
           subtitle={card.subtitle}
           imageSrc={card.imageSrc}
+          icon={card.icon}
           imageAlt={card.imageAlt}
         />
       ))
     ) : (
       <NoDataCard
-        message={i18n.PROJECTS.empty.message}
-        subtitle={i18n.PROJECTS.empty.message2}
+        message={i18n.SUBMITTALS.empty.message}
+        subtitle={i18n.SUBMITTALS.empty.message2}
         imageSrc="/img/notion/white/my-notion-face-transparent_9.png"
       />
     )

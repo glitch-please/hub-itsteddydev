@@ -1,28 +1,15 @@
-/* @font-face {
-  font-family: 'SF Pro Display';
-  src: url('/public/fonts/SFPro/SFProDisplayRegular.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
+/* stylelint-disable at-rule-no-unknown */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* stylelint-enable at-rule-no-unknown */
+
+@import "flowbite";
+@import "flowbite/src/themes/default";
+
+body {
+  font-family: 'Outfit Variable', sans-serif;
 }
-
-@font-face {
-  font-family: 'SF Pro Display';
-  src: url('/public/fonts/SFPro/SFProDisplayBold.otf') format('opentype');
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'SF Pro Display';
-  src: url('/public/fonts/SFPro/SFProDisplayItalic.otf') format('opentype');
-  font-weight: 400;
-  font-style: italic;
-} */
-
-/* Estilos globales */
-/* html {
-  font-family: 'SF Pro Display', sans-serif;
-} */
 
 .scrollbar-hide {
   -ms-overflow-style: none;

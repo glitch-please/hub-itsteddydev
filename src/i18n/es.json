@@ -1,69 +1,50 @@
 {
-  "SEO_TITLE": "ItsTeddyDev Hub - Centro de Recursos y Contenidos",
-  "SEO_DESCRIPTION": "Explora libros, artículos, pasatiempos y recursos educativos en el hub personal de Justcoddev. Descubre lo mejor de mi carrera y mis recomendaciones.",
+  "SEO_TITLE": "CAPCo - Client Resource and Content Center",
+  "SEO_DESCRIPTION": "Explore books, articles, hobbies, and educational resources at Justcoddev's personal hub. Discover the best of my career and my recommendations.",
   "ERROR_404": {
-    "TITLE": "404 - No Encontrado",
-    "DESCRIPTION": "No Encontrado",
-    "BACK_HOMEPAGE_BTN": "Volver"
+    "TITLE": "404 - Not Found",
+    "DESCRIPTION": "Not Found",
+    "BACK_HOMEPAGE_BTN": "Go Back"
   },
   "HERO": {
-    "NAME": "Teddy Summers",
-    "TITLE": "Ingeniero de Software",
-    "DESCRIPTION": "Soy un ingeniero de software que ama aprender y compartir conocimientos. Me apasiona la tecnología, la programación y el desarrollo de software. Siempre estoy buscando nuevos desafíos y oportunidades para crecer."
+    "NAME": "Mahmood Farsogsrty",
+    "TITLE": "85 Tremont / 123 Other St / 43 Last Job",
+    "DESCRIPTION": "sdgfsg"
   },
   "ABOUT": {
-    "TITLE": "acerca de",
-    "DESCRIPTION": "Acerca de DESCRIPCIÓN"
+    "TITLE": "about",
+    "DESCRIPTION": "About DESCRIPTION"
   },
   "NAVBAR": {
-    "PROJECTS": "Projectos",
-    "ARTICLES": "Artículos",
-    "BOOKSMARKS": "Marcadores",
-    "EDUCATION_HUB": "Hub Educativo",
-    "FUN_HOBBIES": "Pasatiempos",
-    "SHOP_NOW": "Comprar Ahora"
+    "SUBMITTALS": "Submittals",
+    "INVOICE": "Invoice",
+    "DELIVERY": "Delivery"
   },
-  "PROJECTS": {
+  "SUBMITTALS": {
     "empty": {
-      "message": "Vaya, no hay proyectos para mostrar.",
-      "message2": "¡Pero no te preocupes, siempre hay algo interesante esperándote!"
+      "message": "Oops, no projects to display.",
+      "message2": "But don't worry, there's always something interesting waiting for you!"
     },
     "BADGE": {
-      "NEW": "Nuevo"
+      "NEW": "New",
+      "VIEWED": "Viewed",
+      "LATE": "Late"
     }
   },
-  "ARTICLES": {
+  "INVOICE": {
     "empty": {
-      "message": "Vaya, no hay artículos para mostrar.",
-      "message2": "¡Pero no te preocupes, siempre hay algo interesante esperándote!"
+      "message": "Oops, there are no articles to display.",
+      "message2": "But don't worry, there's always something interesting waiting for you!"
     }
   },
-  "BOOKSMARKS": {
+  "DELIVERY": {
     "empty": {
-      "message": "Vaya, no hay marcadores para mostrar.",
-      "message2": "¡Pero no te preocupes, siempre hay algo interesante esperándote!"
-    }
-  },
-  "EDUCATION_HUB": {
-    "empty": {
-      "message": "Vaya, no hay recursos educativos para mostrar.",
-      "message2": "¡Pero no te preocupes, siempre hay algo interesante esperándote!"
-    }
-  },
-  "FUN_HOBBIES": {
-    "empty": {
-      "message": "Vaya, no hay pasatiempos divertidos para mostrar.",
-      "message2": "¡Pero no te preocupes, siempre hay algo interesante esperándote!"
-    }
-  },
-  "SHOP_NOW": {
-    "empty": {
-      "message": "Vaya, no hay productos para mostrar.",
-      "message2": "¡Pero no te preocupes, siempre hay algo interesante esperándote!"
+      "message": "Oops, there are no bookmarks to display.",
+      "message2": "But don't worry, there's always something interesting waiting for you!"
     }
   },
   "NOT_DATA": {
-    "message": "Vaya, no hay datos para mostrar.",
-    "message2": "¡Pero no te preocupes, siempre hay algo interesante esperándote!"
+    "message": "Oops, no data to display.",
+    "message2": "But don't worry, there's always something interesting waiting for you!"
   }
 }

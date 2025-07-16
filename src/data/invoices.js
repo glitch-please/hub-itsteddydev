@@ -1,6 +1,6 @@
 export const cardsData = [
   {
-    id: "car-1",
+    id: "card-1",
     url: "www.tabler.io",
     href: "https://tabler.io/icons",
     title: "Tabler Icons",

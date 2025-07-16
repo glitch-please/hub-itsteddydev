@@ -1,0 +1,47 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BoxIcon from '../components/BoxIcon.astro';
+---
+
+<Layout title="Test Icons" description="Testing Boxicons">
+	<div class="p-8 space-y-4">
+		<h1 class="text-2xl font-bold mb-6">Boxicons Test</h1>
+		
+		<div class="space-y-4">
+			<h2 class="text-xl font-semibold">Regular Icons:</h2>
+			<div class="flex gap-4 items-center">
+				<BoxIcon name="home" />
+				<BoxIcon name="user" />
+				<BoxIcon name="heart" />
+				<BoxIcon name="star" />
+				<BoxIcon name="settings" />
+			</div>
+			
+			<h2 class="text-xl font-semibold">Solid Icons:</h2>
+			<div class="flex gap-4 items-center">
+				<BoxIcon name="home" variant="solid" />
+				<BoxIcon name="user" variant="solid" />
+				<BoxIcon name="heart" variant="solid" />
+				<BoxIcon name="star" variant="solid" />
+				<BoxIcon name="settings" variant="solid" />
+			</div>
+			
+			<h2 class="text-xl font-semibold">Logo Icons:</h2>
+			<div class="flex gap-4 items-center">
+				<BoxIcon name="github" variant="logo" />
+				<BoxIcon name="twitter" variant="logo" />
+				<BoxIcon name="linkedin" variant="logo" />
+				<BoxIcon name="instagram" variant="logo" />
+			</div>
+			
+			<h2 class="text-xl font-semibold">Direct HTML:</h2>
+			<div class="flex gap-4 items-center">
+				<i class='bx bx-home text-2xl'></i>
+				<i class='bx bx-user text-2xl'></i>
+				<i class='bx bx-heart text-2xl'></i>
+				<i class='bxs bxs-star text-2xl'></i>
+				<i class='bxl bxl-github text-2xl'></i>
+			</div>
+		</div>
+	</div>
+</Layout> 

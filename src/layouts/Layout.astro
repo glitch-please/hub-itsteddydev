@@ -5,6 +5,7 @@ interface Props {
 }
 
 import "../styles/global.css"; // Importa el CSS desde src/styles
+import "../styles/boxicons.css"; // Import Boxicons CSS
 
 import { getLangFromUrl } from "../i18n/utils";
 
@@ -21,7 +22,7 @@ const { title, description } = Astro.props;
 		<link
 			rel="icon"
 			type="image/svg+xml"
-			href="/img/notion/white/my-notion-face-transparent.png"
+			href="/img/capco-logo.svg"
 		/>
 		<meta name="generator" content={Astro.generator} />
 		<!-- <link rel="stylesheet" type="css" href="../styles/global.css " /> -->
@@ -29,7 +30,7 @@ const { title, description } = Astro.props;
 		<meta property="og:description" content={description} />
 		<meta
 			property="og:image"
-			content="/img/notion/white/my-notion-face-transparent.png"
+			content="/img/capco-logo.svg"
 		/>
 		<meta property="og:url" content="https://hub.justcoddev.com/" />
 		<meta name="twitter:card" content={description} />
@@ -37,7 +38,7 @@ const { title, description } = Astro.props;
 		<meta name="twitter:description" content={description} />
 		<meta
 			name="twitter:image"
-			content="/img/notion/white/my-notion-face-transparent.png"
+			content="/img/capco-logo.svg"
 		/>
 
 		<title>{title}</title>
@@ -47,15 +48,11 @@ const { title, description } = Astro.props;
 	>
 		<!-- <Header /> -->
 		<slot />
+		<script src="/node_modules/flowbite/dist/flowbite.min.js" is:inline></script>
 	</body>
 </html>
 
-<style>
-	body {
-		/* background-color: #101419; */
-		/* background-color: #ffffff; */
-	}
-</style>
+
 
 <script>
 	const themeToggle = document.getElementById("toggle-theme");

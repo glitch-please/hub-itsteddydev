@@ -1,0 +1,369 @@
+---
+import { getI18N } from "@/i18n";
+import ArrowUpRight from "../icons/ArrowUpRight.astro";
+import NewBadge from "./NewBadge.astro";
+
+//Para cambiar idioma de textos
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+
+const {
+  id = "",
+  url = "",
+  href = "#",
+  title = "Título predeterminado",
+  subtitle = "Subtítulo predeterminado",
+  imageSrc = "",
+  imageAlt = "Ícono predeterminado",
+  isNew = false, // Nueva prop para controlar el badge
+} = Astro.props;
+
+
+import { getDocument } from 'pdfjs-dist';
+
+
+---
+
+<h2
+ id="accordion-collapse-heading-1"
+  data-section={id}
+  class="relative p-1 rounded-lg flex items-center justify-between border-[1px]
+   border-hub-border
+   dark:border-hub-border-dark
+   hover:drop-shadow-md
+   hover:bg-hub-background-nav
+   dark:bg-hub-background-nav-dark
+   hover:dark:bg-hub-background-dark group"
+>
+  <!-- Badge de "New" -->
+  {
+    isNew && (
+      <div
+        class=" animate-pulse absolute top-0 right-2 transform translate-x-1/2 -translate-y-1/2 bg-sky-500
+       text-white 
+       text-xs 
+       font-semibold px-2 py-0.5 rounded-full shadow-md z-10"
+      >
+        {i18n.SUBMITTALS.BADGE.NEW}
+      </div>
+    )
+  }
+
+    <!-- Contenedor izquierdo -->
+    <div class="flex items-center">
+      <div
+        class="rounded-lg border-[1px] size-9 flex items-center justify-center
+         border-hub-border
+          dark:border-hub-border-dark
+        dark:bg-hub-background
+        overflow-hidden"
+      >
+        <img src={imageSrc} alt={imageAlt} class="w-full h-full object-cover" />
+      </div>
+  
+      <div class="pl-4 flex flex-col justify-start">
+        <h2 class="font-medium text-base text-hub-title dark:text-hub-title-dark">
+          {title}
+        </h2>
+        <small class="text-hub-subtitle dark:text-hub-subtitle-dark text-xs"
+          >{url}</small
+        >
+      </div>
+    </div>
+  
+    <!-- Icono derecho -->
+    <ArrowUpRight
+      class="size-6 text-hub-subtitle dark:text-hub-subtitle-dark transition-transform duration-300 ease-in-out group-hover:rotate-45"
+    />
+
+<!-- <h2 id="accordion-collapse-heading-1">
+  <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3" data-accordion-target="#accordion-collapse-body-1" aria-expanded="true" aria-controls="accordion-collapse-body-1">
+    <span>What is Flowbite?</span>
+    <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+    </svg>
+  </button>
+</h2> -->
+
+
+
+  </h2>
+
+<div id="accordion-collapse-body-1" class="hidden" aria-labelledby="accordion-collapse-heading-1">
+  <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
+    <p class="mb-2 text-gray-500 dark:text-gray-400">Flowbite is an open-source library of interactive components built on top of Tailwind CSS including buttons, dropdowns, modals, navbars, and more.</p>
+    <p class="text-gray-500 dark:text-gray-400">Check out this guide to learn how to <a href="/docs/getting-started/introduction/" class="text-blue-600 dark:text-blue-500 hover:underline">get started</a> and start developing websites even faster with components on top of Tailwind CSS.</p>
+  </div>
+</div>
+
+
+
+<!-- 
+  <h2 id="accordion-collapse-heading-1">
+    <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3" data-accordion-target="#accordion-collapse-body-1" aria-expanded="true" aria-controls="accordion-collapse-body-1">
+      <span>What is Flowbite?</span>
+      <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+      </svg>
+    </button>
+  </h2>
+  <div id="accordion-collapse-body-1" class="hidden" aria-labelledby="accordion-collapse-heading-1">
+    <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
+      <p class="mb-2 text-gray-500 dark:text-gray-400">Flowbite is an open-source library of interactive components built on top of Tailwind CSS including buttons, dropdowns, modals, navbars, and more.</p>
+      <p class="text-gray-500 dark:text-gray-400">Check out this guide to learn how to <a href="/docs/getting-started/introduction/" class="text-blue-600 dark:text-blue-500 hover:underline">get started</a> and start developing websites even faster with components on top of Tailwind CSS.</p>
+    </div>
+  </div>
+  <h2 id="accordion-collapse-heading-2">
+    <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3" data-accordion-target="#accordion-collapse-body-2" aria-expanded="false" aria-controls="accordion-collapse-body-2">
+      <span>Is there a Figma file available?</span>
+      <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+      </svg>
+    </button>
+  </h2>
+  <div id="accordion-collapse-body-2" class="hidden" aria-labelledby="accordion-collapse-heading-2">
+    <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700">
+      <p class="mb-2 text-gray-500 dark:text-gray-400">Flowbite is first conceptualized and designed using the Figma software so everything you see in the library has a design equivalent in our Figma file.</p>
+      <p class="text-gray-500 dark:text-gray-400">Check out the <a href="https://flowbite.com/figma/" class="text-blue-600 dark:text-blue-500 hover:underline">Figma design system</a> based on the utility classes from Tailwind CSS and components from Flowbite.</p>
+    </div>
+  </div>
+  <h2 id="accordion-collapse-heading-3">
+    <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3" data-accordion-target="#accordion-collapse-body-3" aria-expanded="false" aria-controls="accordion-collapse-body-3">
+      <span>What are the differences between Flowbite and Tailwind UI?</span>
+      <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+      </svg>
+    </button>
+  </h2>
+  <div id="accordion-collapse-body-3" class="hidden" aria-labelledby="accordion-collapse-heading-3">
+    <div class="p-5 border border-t-0 border-gray-200 dark:border-gray-700">
+      <p class="mb-2 text-gray-500 dark:text-gray-400">The main difference is that the core components from Flowbite are open source under the MIT license, whereas Tailwind UI is a paid product. Another difference is that Flowbite relies on smaller and standalone components, whereas Tailwind UI offers sections of pages.</p>
+      <p class="mb-2 text-gray-500 dark:text-gray-400">However, we actually recommend using both Flowbite, Flowbite Pro, and even Tailwind UI as there is no technical reason stopping you from using the best of two worlds.</p>
+      <p class="mb-2 text-gray-500 dark:text-gray-400">Learn more about these technologies:</p>
+      <ul class="ps-5 text-gray-500 list-disc dark:text-gray-400">
+        <li><a href="https://flowbite.com/pro/" class="text-blue-600 dark:text-blue-500 hover:underline">Flowbite Pro</a></li>
+        <li><a href="https://tailwindui.com/" rel="nofollow" class="text-blue-600 dark:text-blue-500 hover:underline">Tailwind UI</a></li>
+      </ul>
+    </div>
+  </div> -->
+
+
+
+  <!-- Accordion Header -->
+
+    <!-- <div class="flex items-center">
+      <div
+        class="rounded-lg border size-9 flex items-center justify-center border-hub-border dark:border-hub-border-dark dark:bg-hub-background overflow-hidden"
+      >
+        <i class={icon}></i>
+      </div>
+      <div class="pl-4 flex flex-col justify-start">
+        <h2 class="font-medium text-base text-hub-title dark:text-hub-title-dark">
+          {title}
+        </h2>
+        <small class="text-hub-subtitle dark:text-hub-subtitle-dark text-xs">
+          Added: <em>{subtitle}</em>
+        </small>
+      </div>
+    </div>
+    <ArrowUpRight
+      class="size-6 text-hub-subtitle dark:text-hub-subtitle-dark transition-transform duration-300 ease-in-out"
+      :class="{ 'rotate-45': open }"
+    /> -->
+
+  <!-- Accordion Content -->
+  <!-- <div class="overflow-hidden bg-white dark:bg-hub-background-dark" 
+  >
+    <div class="p-4">
+      <div data-pdf-holder="https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf" class="flex flex-col items-center gap-2"></div>
+      <div class="controls flex gap-2 mt-2 justify-center">
+        <button class="pdf-prev-page px-2 py-1 border rounded">Prev</button>
+        <span class="pdf-page-info"></span>
+        <button class="pdf-next-page px-2 py-1 border rounded">Next</button>
+        <button class="pdf-download px-2 py-1 border rounded bg-blue-500 text-white">Download PDF</button>
+      </div>
+    </div>
+  </div> -->
+
+  
+
+
+
+
+
+
+
+
+
+<script src="../js/pdf.min.js" defer is:inline></script>
+<script type="module" is:inline>
+window.addEventListener('DOMContentLoaded', () => {
+  function waitForPDFJS() {
+    return new Promise((resolve) => {
+      function check() {
+        if (window['pdfjsLib']) resolve();
+        else setTimeout(check, 50);
+      }
+      check();
+    });
+  }
+
+  waitForPDFJS().then(() => {
+    const pdfjsLib = window['pdfjsLib'];
+    pdfjsLib.GlobalWorkerOptions.workerSrc = '../js/pdf.worker.min.js';
+
+    document.querySelectorAll('[data-pdf-holder]').forEach((container) => {
+      const PDF_URL = container.getAttribute('data-pdf-holder');
+      if (!PDF_URL) return;
+
+      // Find controls relative to this container
+      const parent = container.parentElement;
+      const controls = parent.querySelector('.controls');
+      const prevBtn = controls.querySelector('.pdf-prev-page');
+      const nextBtn = controls.querySelector('.pdf-next-page');
+      const pageInfo = controls.querySelector('.pdf-page-info');
+      const downloadBtn = controls.querySelector('.pdf-download');
+
+      let pdfDoc = null;
+      let currentPage = 1;
+      let totalPages = 1;
+      let pageRendering = false;
+      let pageNumPending = null;
+      let canvas = null;
+
+      function loadPDF(url) {
+        pdfjsLib.getDocument(url).promise.then(function(pdf) {
+          pdfDoc = pdf;
+          totalPages = pdf.numPages;
+          currentPage = 1;
+          renderPage(currentPage);
+        });
+      }
+
+      function renderPage(num) {
+        pageRendering = true;
+        pdfDoc.getPage(num).then(function(page) {
+          // Responsive scaling
+          const containerWidth = container.offsetWidth || 300;
+          const viewport = page.getViewport({ scale: 1 });
+          const scale = containerWidth / viewport.width;
+          const scaledViewport = page.getViewport({ scale });
+          if (!canvas) {
+            canvas = document.createElement('canvas');
+            container.innerHTML = '';
+            container.appendChild(canvas);
+          }
+          const context = canvas.getContext('2d');
+          canvas.height = scaledViewport.height;
+          canvas.width = scaledViewport.width;
+          const renderContext = {
+            canvasContext: context,
+            viewport: scaledViewport
+          };
+          const renderTask = page.render(renderContext);
+          renderTask.promise.then(function() {
+            pageRendering = false;
+            pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+            prevBtn.disabled = currentPage === 1;
+            nextBtn.disabled = currentPage === totalPages;
+            if (pageNumPending !== null) {
+              renderPage(pageNumPending);
+              pageNumPending = null;
+            }
+          });
+        });
+      }
+
+      prevBtn.addEventListener('click', function() {
+        if (currentPage <= 1) return;
+        if (pageRendering) {
+          pageNumPending = currentPage - 1;
+        } else {
+          currentPage--;
+          renderPage(currentPage);
+        }
+      });
+
+      nextBtn.addEventListener('click', function() {
+        if (currentPage >= totalPages) return;
+        if (pageRendering) {
+          pageNumPending = currentPage + 1;
+        } else {
+          currentPage++;
+          renderPage(currentPage);
+        }
+      });
+
+      downloadBtn.addEventListener('click', function() {
+        const link = document.createElement('a');
+        link.href = PDF_URL;
+        link.download = PDF_URL.split('/').pop() || 'document.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
+
+      loadPDF(PDF_URL);
+    });
+  });
+});
+</script>
+
+<script>
+
+
+const accordions = document.querySelectorAll('[data-accordion]');
+
+// Handle clicks on each button.
+accordions.forEach((accordion) => {
+  accordion.addEventListener('click', () => {
+    // alert('Button was clicked!');
+  });
+});
+	
+
+  // $(document).on('accordion:toggle:finished', function(e, l){
+  //     var headerH = $('[uk-header]').outerHeight();
+      
+  //     if($(window).width() < 769 ){
+  //         // if($(window).width() < 769 && l.scrollTop > 60 ){
+
+  //         $('html, body').animate({
+  //             scrollTop: $(l).offset().top - headerH - 80
+  //         }, 1000);
+
+  //     } else {
+    
+  //        $('html, body').animate({
+  //             scrollTop: $(l).offset().top - headerH - 80
+  //         }, 1000);
+  //     }
+  // })
+
+
+  // let l = document.querySelector(),
+  //     t = $(".press-content");
+
+
+  // l.on('click', function () {
+  //     l.removeClass("on"),
+  //         t.slideUp(350),
+
+  //     1 == $(this).next().is(":hidden") && ($(this).addClass("on"), $(this).next().slideDown(350, function () {
+  //         $(document).trigger('accordion:toggle:finished', $(this));
+  //     }));
+
+
+  // }),
+
+  // l.on('mouseenter', function () {
+  //     $(this).addClass("over")
+  // }).mouseout(function () {
+  //     $(this).removeClass("over")
+  // }), t.hide()
+
+// });
+
+
+
+</script>

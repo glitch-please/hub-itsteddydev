@@ -1,7 +1,7 @@
 ---
-import BooksMarks from "./BooksMarks.astro";
-import Projects from "./Projects.astro";
-import Articles from "./Articles.astro";
+import Delivery from "./Delivery.astro";
+import Submittals from "./Submittals.astro";
+import Invoice from "./Invoice.astro";
 import NavButton from "./index/NavButton.astro";
 import SectionContainer from "./SectionContainer.astro";
 import EducationHub from "./EducationHub.astro";
@@ -18,51 +18,31 @@ const i18n = getI18N({ currentLocale });
   <nav
     class="flex gap-1 text-hub-inactive rounded-full border-[1px] p-[2px] border-hub-border dark:border-hub-border-dark bg-hub-background-nav dark:bg-hub-background-nav whitespace-nowrap overflow-x-auto scrollbar-hide"
   >
-    <NavButton class="tab-btn" aria-label="btn-projects" data-target="projects"
-      >{i18n.NAVBAR.PROJECTS}</NavButton
+    <NavButton class="tab-btn" aria-label="btn-submittals" data-target="submittals"
+      >{i18n.NAVBAR.SUBMITTALS}</NavButton
     >
-    <NavButton class="tab-btn" aria-label="btn-Articles" data-target="articles"
-      >{i18n.NAVBAR.ARTICLES}</NavButton
-    >
-    <NavButton
-      class="tab-btn"
-      aria-label="btn-projects"
-      data-target="booksMarks">{i18n.NAVBAR.BOOKSMARKS}</NavButton
+    <NavButton class="tab-btn" aria-label="btn-invoices" data-target="invoice"
+      >{i18n.NAVBAR.INVOICE}</NavButton
     >
     <NavButton
       class="tab-btn"
-      aria-label="btn-projects"
-      data-target="educationHub">{i18n.NAVBAR.EDUCATION_HUB}</NavButton
+      aria-label="btn-delivery"
+      data-target="delivery">{i18n.NAVBAR.DELIVERY}</NavButton
     >
-    <NavButton
-      class="tab-btn"
-      aria-label="btn-projects"
-      data-target="funHobbies">{i18n.NAVBAR.FUN_HOBBIES}</NavButton
-    >
-    <NavButton class="tab-btn" aria-label="btn-funHobbies" data-target="shopNow"
-      >{i18n.NAVBAR.SHOP_NOW}</NavButton
-    >
+
   </nav>
 
   <main class="mt-6">
-    <SectionContainer id="projects" class="tab-content mt-0 mb-0">
-      <Projects />
+    <SectionContainer id="submittals" class="tab-content mt-0 mb-0">
+      <Submittals />
     </SectionContainer>
-    <SectionContainer id="articles" class="tab-content hidden mt-0 mb-0">
-      <Articles />
+    <SectionContainer id="invoices" class="tab-content hidden mt-0 mb-0">
+      <Invoice />
     </SectionContainer>
-    <SectionContainer id="booksMarks" class="tab-content hidden mt-0 mb-0">
-      <BooksMarks />
+    <SectionContainer id="delivery" class="tab-content hidden mt-0 mb-0">
+      <Delivery />
     </SectionContainer>
-    <SectionContainer id="educationHub" class="tab-content hidden mt-0 mb-0">
-      <EducationHub />
-    </SectionContainer>
-    <SectionContainer id="funHobbies" class="tab-content hidden mt-0 mb-0">
-      <FunHobbies />
-    </SectionContainer>
-    <SectionContainer id="shopNow" class="tab-content hidden mt-0 mb-0">
-      <ShopNow />
-    </SectionContainer>
+
   </main>
 </div>
 
@@ -71,7 +51,7 @@ const i18n = getI18N({ currentLocale });
   const contents = document.querySelectorAll(".tab-content");
 
   // Establece el botón activo por defecto
-  const defaultActive = document.querySelector('[data-target="projects"]');
+  const defaultActive = document.querySelector('[data-target="submittals"]');
   if (defaultActive) {
     defaultActive.classList.add(
       "bg-hub-background",
@@ -81,9 +61,9 @@ const i18n = getI18N({ currentLocale });
       "dark:text-hub-title-dark",
       "dark:bg-hub-background-dark",
     );
-    const projectsSection = document.getElementById("projects");
-    if (projectsSection) {
-      projectsSection.classList.remove("hidden");
+    const submittalsSection = document.getElementById("submittals");
+    if (submittalsSection) {
+      submittalsSection.classList.remove("hidden");
     }
   }
 

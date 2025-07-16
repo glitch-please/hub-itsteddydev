@@ -1,14 +1,29 @@
 export const cardsData = [
   {
-    id: "card-1",
+    id: "1",
     url: "valoraprime.vercel.app",
     href: "https://valoraprime.vercel.app/",
-    title: "Valora Prime",
-    subtitle: "valoraprime.justcoddev.com",
+    title: "Initial Affidavit",
+    subtitle: "July 23, 2025",
     imageSrc: "/img/projects/valoraprime.png",
+    icon: "bx bxl-adobe bx-sm",
     imageAlt: "App icon",
     className: "custom-card-class",
-    isNew: true
+    isNew: true,
+    isViewed: false,
+  },
+  {
+    id: "2",
+    url: "valoraprime.vercel.app",
+    href: "https://valoraprime.vercel.app/",
+    title: "Narrative",
+    subtitle: "July 24, 2025",
+    imageSrc: "/img/projects/valoraprime.png",
+    icon: "bx bxl-adobe bx-sm",
+    imageAlt: "App icon",
+    className: "custom-card-class",
+    isNew: true,
+    isViewed: true,
   },
   // {
   //   id: "card-2",
