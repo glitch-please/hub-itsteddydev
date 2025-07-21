@@ -1,0 +1,52 @@
+---
+import Delivery from "./Delivery.astro";
+import Submittals from "./Submittals.astro";
+import Invoice from "./Invoice.astro";
+import NavButton from "./index/NavButton.astro";
+import SectionContainer from "./SectionContainer.astro";
+import EducationHub from "./EducationHub.astro";
+import FunHobbies from "./FunHobbies.astro";
+import ShopNow from "./ShopNow.astro";
+import { getI18N } from "@/i18n";
+
+//Para cambiar idioma de textos
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+
+let error = "";
+---
+
+<form id="login-form">
+  <input name="email" type="email" placeholder="Email" required />
+  <input name="password" type="password" placeholder="Password" required />
+  <button type="submit">Login</button>
+</form>
+{error && <p style="color:red">{error}</p>}
+<p>Don't have an account? <a href="/register">Register</a></p>
+<script type="module">
+  let error = "";
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const res = await fetch("/api/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: form.elements.namedItem("email").value,
+        password: form.elements.namedItem("password").value,
+      }),
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      error = data.error || "Login failed";
+      document
+        .querySelector("p[style]")
+        ?.replaceWith(document.createElement("p"));
+    } else {
+      window.location.href = "/";
+    }
+  }
+  document
+    .getElementById("login-form")
+    .addEventListener("submit", handleSubmit);
+</script>

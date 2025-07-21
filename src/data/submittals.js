@@ -1,6 +1,5 @@
 export const cardsData = [
   {
-    id: "1",
     url: "valoraprime.vercel.app",
     href: "https://valoraprime.vercel.app/",
     title: "Initial Affidavit",
@@ -9,11 +8,11 @@ export const cardsData = [
     icon: "bx bxl-adobe bx-sm",
     imageAlt: "App icon",
     className: "custom-card-class",
+    isLate: false,
     isNew: true,
     isViewed: false,
   },
   {
-    id: "2",
     url: "valoraprime.vercel.app",
     href: "https://valoraprime.vercel.app/",
     title: "Narrative",
@@ -22,8 +21,22 @@ export const cardsData = [
     icon: "bx bxl-adobe bx-sm",
     imageAlt: "App icon",
     className: "custom-card-class",
-    isNew: true,
+    isNew: false,
     isViewed: true,
+    isLate: false,
+  },
+  {
+    url: "valoraprime.vercel.app",
+    href: "https://valoraprime.vercel.app/",
+    title: "Narrative",
+    subtitle: "July 24, 2025",
+    imageSrc: "/img/projects/valoraprime.png",
+    icon: "bx bxl-adobe bx-sm",
+    imageAlt: "App icon",
+    className: "custom-card-class",
+    isNew: false,
+    isViewed: true,
+    isLate: true,
   },
   // {
   //   id: "card-2",

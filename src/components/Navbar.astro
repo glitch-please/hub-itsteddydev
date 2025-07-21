@@ -18,18 +18,17 @@ const i18n = getI18N({ currentLocale });
   <nav
     class="flex gap-1 text-hub-inactive rounded-full border-[1px] p-[2px] border-hub-border dark:border-hub-border-dark bg-hub-background-nav dark:bg-hub-background-nav whitespace-nowrap overflow-x-auto scrollbar-hide"
   >
-    <NavButton class="tab-btn" aria-label="btn-submittals" data-target="submittals"
-      >{i18n.NAVBAR.SUBMITTALS}</NavButton
+    <NavButton
+      class="tab-btn"
+      aria-label="btn-submittals"
+      data-target="submittals">{i18n.NAVBAR.SUBMITTALS}</NavButton
     >
     <NavButton class="tab-btn" aria-label="btn-invoices" data-target="invoice"
       >{i18n.NAVBAR.INVOICE}</NavButton
     >
-    <NavButton
-      class="tab-btn"
-      aria-label="btn-delivery"
-      data-target="delivery">{i18n.NAVBAR.DELIVERY}</NavButton
+    <NavButton class="tab-btn" aria-label="btn-delivery" data-target="delivery"
+      >{i18n.NAVBAR.DELIVERY}</NavButton
     >
-
   </nav>
 
   <main class="mt-6">
@@ -42,7 +41,6 @@ const i18n = getI18N({ currentLocale });
     <SectionContainer id="delivery" class="tab-content hidden mt-0 mb-0">
       <Delivery />
     </SectionContainer>
-
   </main>
 </div>
 
@@ -59,11 +57,11 @@ const i18n = getI18N({ currentLocale });
       "text-hub-title",
       "font-bold",
       "dark:text-hub-title-dark",
-      "dark:bg-hub-background-dark",
+      "dark:bg-hub-background-dark"
     );
-    const submittalsSection = document.getElementById("submittals");
-    if (submittalsSection) {
-      submittalsSection.classList.remove("hidden");
+    const projectsSection = document.getElementById("submittals");
+    if (projectsSection) {
+      projectsSection.classList.remove("hidden");
     }
   }
 
@@ -79,8 +77,8 @@ const i18n = getI18N({ currentLocale });
           "text-hub-title",
           "font-bold",
           "dark:text-hub-title-dark",
-          "dark:bg-hub-background-dark",
-        ),
+          "dark:bg-hub-background-dark"
+        )
       );
       button.classList.add(
         "bg-hub-background",
@@ -88,7 +86,7 @@ const i18n = getI18N({ currentLocale });
         "text-hub-title",
         "font-bold",
         "dark:text-hub-title-dark",
-        "dark:bg-hub-background-dark",
+        "dark:bg-hub-background-dark"
       );
 
       // Oculta todas las secciones
