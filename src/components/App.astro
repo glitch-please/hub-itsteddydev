@@ -1,39 +1,102 @@
 ---
 import SectionContainer from "./SectionContainer.astro";
 import Hero from "./index/Hero.astro";
+import AuthHero from "./index/AuthHero.astro";
+
 import SocialMedia from "./index/SocialMedia.astro";
 import Navbar from "./Navbar.astro";
 import { getI18N } from "@/i18n";
 import Layout from "@/layouts/Layout.astro";
 import Header from "./index/Header.astro";
-
-//para cambiar entre idiomas y traducir rutas
-// const lang = getLangFromUrl(Astro.url);
-// const translatePath = useTranslatedPath(lang);
-
+import AuthForm from "./AuthForm.astro";
 //Para cambiar idioma de textos
 const { currentLocale } = Astro;
 const i18n = getI18N({ currentLocale });
+
+import { supabase } from "../lib/supabaseClient";
 ---
 
 <Layout title={i18n.SEO_TITLE} description={i18n.SEO_DESCRIPTION}>
-  <!-- <Welcome /> -->
-
-  <main class="mx-6 mt-4
-		md:max-w-[1000px]
-		md:w-full">
+  <main class="mx-6 mt-4 md:w-full md:max-w-[1000px]">
     <SectionContainer class="flex flex-col gap-y-6">
       <Hero />
     </SectionContainer>
-    <!-- <SectionContainer>
-      <Header />
-    </SectionContainer> -->
-    <SectionContainer class="">
-      <Navbar />
-    </SectionContainer>
-
-    <SectionContainer class="flex flex-col gap-y-6 fixed bottom-0">
+    <div id="client-content" style="display:none">
+      <!-- start user must be logged in to see this -->
+      <SectionContainer class="flex flex-col gap-y-6">
+        <AuthHero />
+      </SectionContainer>
+      <SectionContainer>
+        <Header />
+      </SectionContainer>
+      <SectionContainer class="">
+        <Navbar />
+      </SectionContainer>
+      <!--end user must be logged in to see this -->
+    </div>
+    <!-- start login or register form -->
+    <div
+      id="app-auth-form"
+      style="display:none"
+      class="flex min-h-[calc(100vh-var(--header-height))] items-center justify-center"
+    >
+      <SectionContainer class="flex flex-col">
+        <AuthForm />
+      </SectionContainer>
+    </div>
+    <!-- end login or register form -->
+    <SectionContainer class="fixed bottom-0 flex flex-col gap-y-6">
       <SocialMedia />
     </SectionContainer>
   </main>
 </Layout>
+
+<script type="module" is:inline>
+  // import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+  // const supabase = createClient("{supabaseUrl}", "{supabaseAnonKey}");
+</script>
+
+<script type="module" is:inline>
+  // const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
+  // console.log("SUPABASE_URL:", supabaseUrl);
+
+  // const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
+
+  // console.log(`${supabase}`);
+
+  const supabaseUrl = "https://qudlxlryegnainztkrtk.supabase.co";
+  const supabaseAnonKey =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF1ZGx4bHJ5ZWduYWluenRrcnRrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI2MzUwMTMsImV4cCI6MjA2ODIxMTAxM30.pAWMWGUCK48Lujssi3Ip4GUm11TZDmaNCINqX3q2m5o";
+  import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+  const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+  const clientContent = document.getElementById("client-content");
+  const form = document.getElementById("app-auth-form");
+
+  async function checkAuthAndRole() {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+    if (session && session.user) {
+      // Fetch profile
+      const { data: profile, error } = await supabase
+        .from("profiles")
+        .select("role")
+        .eq("id", session.user.id)
+        .single();
+      if (!error && profile && profile.role === "Client") {
+        clientContent.style.display = "";
+        form.style.display = "none";
+        return;
+      }
+    }
+    clientContent.style.display = "none";
+    form.style.display = "";
+  }
+
+  checkAuthAndRole();
+  supabase.auth.onAuthStateChange(() => {
+    checkAuthAndRole();
+  });
+</script>

@@ -3,13 +3,12 @@ import { defineConfig } from 'astro/config';
 
 import tailwind from '@astrojs/tailwind';
 
-import db from '@astrojs/db';
 // Supports weights 100-900
 import '@fontsource-variable/outfit';
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [tailwind(), db()],
+  integrations: [tailwind()],
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'es'],

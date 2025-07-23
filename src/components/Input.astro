@@ -1,0 +1,127 @@
+---
+interface Props {
+  className?: string;
+  name?: string;
+  placeholder: string;
+  readonly?: boolean;
+  required: boolean;
+  type: "text" | "email" | "password" | "number" | "tel" | "url";
+  title?: string;
+  value?: string;
+}
+
+const {
+  className = "input input-bordered w-full rounded border border-gray-300 bg-gray-50 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-sky-500 dark:border-gray-700 dark:bg-gray-800",
+  type,
+  name = "name-" + Date.now(),
+  title = name,
+  placeholder,
+  readonly = false,
+  required,
+  value = "",
+} = Astro.props;
+---
+
+<!-- <label
+  for={name}
+  class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:start-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:font-medium peer-focus:text-blue-600 dark:text-gray-400 peer-focus:dark:text-blue-500 rtl:peer-focus:translate-x-1/4"
+  >{title}</label
+> -->
+<input
+  {type}
+  {name}
+  id={name.toLowerCase().replace(" ", "_")}
+  class={className}
+  {placeholder}
+  {readonly}
+  {required}
+  {value}
+/>
+
+<script type="module">
+  // import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+  // const supabase = createClient(
+  //   import.meta.env.PUBLIC_SUPABASE_URL,
+  //   import.meta.env.PUBLIC_SUPABASE_ANON_KEY
+  // );
+
+  const supabaseUrl = "https://qudlxlryegnainztkrtk.supabase.co";
+  const supabaseAnonKey =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF1ZGx4bHJ5ZWduYWluenRrcnRrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI2MzUwMTMsImV4cCI6MjA2ODIxMTAxM30.pAWMWGUCK48Lujssi3Ip4GUm11TZDmaNCINqX3q2m5o";
+  import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+  const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+  let view = "sign_in";
+  let loading = false;
+
+  const form = document.getElementById("auth-form");
+  const submitBtn = document.getElementById("auth-submit");
+  const errorP = document.getElementById("auth-error");
+  const toggleBtn = document.getElementById("toggle-view");
+  const title = document.getElementById("auth-title");
+  const googleBtn = document.getElementById("google-btn");
+
+  function setLoading(state) {
+    loading = state;
+    submitBtn.disabled = loading;
+    googleBtn.disabled = loading;
+    submitBtn.textContent = loading
+      ? "Loading..."
+      : view === "sign_in"
+        ? "Sign In"
+        : "Sign Up";
+    googleBtn.textContent = loading ? "Loading..." : "Sign in with Google";
+  }
+
+  function setError(msg) {
+    if (msg) {
+      errorP.textContent = msg;
+      errorP.style.display = "";
+    } else {
+      errorP.textContent = "";
+      errorP.style.display = "none";
+    }
+  }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+    const email = form.email.value;
+    const password = form.password.value;
+    let result;
+    if (view === "sign_in") {
+      result = await supabase.auth.signInWithPassword({ email, password });
+    } else {
+      result = await supabase.auth.signUp({ email, password });
+    }
+    setLoading(false);
+    if (result.error) {
+      setError(result.error.message);
+    } else {
+      window.location.href = "/";
+    }
+  });
+
+  googleBtn.addEventListener("click", async () => {
+    setLoading(true);
+    setError("");
+    const { error: gError } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+    });
+    setLoading(false);
+    if (gError) setError(gError.message);
+  });
+
+  toggleBtn.addEventListener("click", () => {
+    view = view === "sign_in" ? "sign_up" : "sign_in";
+    title.textContent = view === "sign_in" ? "Sign In" : "Create Account";
+    submitBtn.textContent = view === "sign_in" ? "Sign In" : "Sign Up";
+    toggleBtn.textContent =
+      view === "sign_in"
+        ? "Don't have an account? Sign up"
+        : "Already have an account? Sign in";
+    setError("");
+  });
+</script>
