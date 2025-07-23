@@ -122,6 +122,8 @@ const {
       view === "sign_in"
         ? "Don't have an account? Sign up"
         : "Already have an account? Sign in";
+    googleBtn.textContent =
+      view === "sign_in" ? "Sign in with Google" : "Sign up with Google";
     setError("");
   });
 </script>
