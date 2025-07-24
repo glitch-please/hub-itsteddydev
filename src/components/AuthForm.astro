@@ -1,5 +1,4 @@
 ---
-import { supabase } from "../lib/supabaseClient";
 import Input from "./Input.astro";
 import InputWrap from "./InputWrap.astro";
 ---
@@ -7,7 +6,6 @@ import InputWrap from "./InputWrap.astro";
 <div
   class="mx-auto mt-12 min-w-80 max-w-lg rounded-lg bg-white p-8 shadow-lg dark:bg-hub-background-dark md:min-w-96 md:max-w-xl lg:min-w-[32rem] lg:max-w-2xl xl:min-w-[40rem] xl:max-w-3xl"
 >
-  <h2 id="auth-title" class="mb-6 text-center text-2xl font-bold">Sign In</h2>
   <form id="auth-form" class="flex flex-col gap-4">
     <InputWrap>
       <Input name="email" type="email" placeholder="Email" required />
@@ -52,15 +50,9 @@ import InputWrap from "./InputWrap.astro";
 </div>
 
 <script type="module">
-  import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+  import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 
   document.addEventListener("DOMContentLoaded", () => {
-    // import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
-    // const supabase = createClient(
-    //   import.meta.env.PUBLIC_SUPABASE_URL,
-    //   import.meta.env.PUBLIC_SUPABASE_ANON_KEY
-    // );
-
     const supabaseUrl = "https://qudlxlryegnainztkrtk.supabase.co";
     const supabaseAnonKey =
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF1ZGx4bHJ5ZWduYWluenRrcnRrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI2MzUwMTMsImV4cCI6MjA2ODIxMTAxM30.pAWMWGUCK48Lujssi3Ip4GUm11TZDmaNCINqX3q2m5o";
@@ -74,7 +66,6 @@ import InputWrap from "./InputWrap.astro";
     const submitBtn = document.getElementById("auth-submit");
     const errorP = document.getElementById("auth-error");
     const toggleBtn = document.getElementById("toggle-view");
-    const title = document.getElementById("auth-title");
     const googleBtn = document.getElementById("google-btn");
 
     function setLoading(state) {
@@ -107,7 +98,10 @@ import InputWrap from "./InputWrap.astro";
       const password = form.password.value;
       let result;
       if (view === "sign_in") {
-        result = await supabase.auth.signInWithPassword({ email, password });
+        result = await supabase.auth.signInWithPassword({
+          email,
+          password,
+        });
       } else {
         result = await supabase.auth.signUp({ email, password });
       }
@@ -131,7 +125,7 @@ import InputWrap from "./InputWrap.astro";
 
     toggleBtn.addEventListener("click", () => {
       view = view === "sign_in" ? "sign_up" : "sign_in";
-      title.textContent = view === "sign_in" ? "Sign In" : "Create Account";
+      // title.textContent = view === "sign_in" ? "Sign In" : "Create Account";
       submitBtn.textContent = view === "sign_in" ? "Sign In" : "Sign Up";
       toggleBtn.textContent =
         view === "sign_in"

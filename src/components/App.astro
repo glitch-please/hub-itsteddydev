@@ -2,14 +2,12 @@
 import SectionContainer from "./SectionContainer.astro";
 import Hero from "./index/Hero.astro";
 import AuthHero from "./index/AuthHero.astro";
-
 import SocialMedia from "./index/SocialMedia.astro";
 import Navbar from "./Navbar.astro";
 import { getI18N } from "@/i18n";
 import Layout from "@/layouts/Layout.astro";
 import Header from "./index/Header.astro";
 import AuthForm from "./AuthForm.astro";
-//Para cambiar idioma de textos
 const { currentLocale } = Astro;
 const i18n = getI18N({ currentLocale });
 
@@ -52,25 +50,11 @@ import { supabase } from "../lib/supabaseClient";
 </Layout>
 
 <script type="module" is:inline>
-  // import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
-  // const supabase = createClient("{supabaseUrl}", "{supabaseAnonKey}");
-</script>
-
-<script type="module" is:inline>
-  // const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
-  // console.log("SUPABASE_URL:", supabaseUrl);
-
-  // const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
-
-  // console.log(`${supabase}`);
-
   const supabaseUrl = "https://qudlxlryegnainztkrtk.supabase.co";
   const supabaseAnonKey =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF1ZGx4bHJ5ZWduYWluenRrcnRrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI2MzUwMTMsImV4cCI6MjA2ODIxMTAxM30.pAWMWGUCK48Lujssi3Ip4GUm11TZDmaNCINqX3q2m5o";
   import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
-
   const supabase = createClient(supabaseUrl, supabaseAnonKey);
-
   const clientContent = document.getElementById("client-content");
   const form = document.getElementById("app-auth-form");
 
@@ -85,8 +69,38 @@ import { supabase } from "../lib/supabaseClient";
         .select("role")
         .eq("id", session.user.id)
         .single();
+
       if (!error && profile && profile.role === "Client") {
+        const { data: projects, error } = await supabase
+          .from("projects")
+          .select("*")
+          .eq("author_id", session.user.id);
+
         clientContent.style.display = "";
+        if (projects?.length > 0) {
+          clientContent.innerHTML = `
+            <div>You have ${projects.length} projects</div>
+            ${projects.map((project) => `<div>${project.name}</div>`).join("")}
+          `;
+        } else {
+          clientContent.innerHTML = "<div>No projects found</div>";
+        }
+        form.style.display = "none";
+        return;
+      }
+
+      if (!error && profile && profile.role === "Admin") {
+        const { data: projects, error } = await supabase.from("projects");
+
+        clientContent.style.display = "";
+        clientContent.innerHTML = `
+          <div class="flex flex-col gap-y-6">
+            <h1>Projects</h1>
+            <ul>
+              ${projects.map((project) => `<li>${project.name}</li>`).join("")}
+            </ul>
+          </div>
+        `;
         form.style.display = "none";
         return;
       }

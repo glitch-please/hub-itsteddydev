@@ -6,6 +6,7 @@ import IconShare2 from "../../icons/IconShare2.astro";
 import IconSun from "../../icons/IconSun.astro";
 import HeroButton from "../HeroButton.astro";
 import LanguagePicker from "../LanguagePicker.astro";
+import Tooltip from "../Tooltip.astro";
 
 //Para cambiar idioma de textos
 const { currentLocale } = Astro;
@@ -69,19 +70,63 @@ const i18n = getI18N({ currentLocale });
         </g>
       </svg>
     </a>
-    <div class="flex gap-2 flex-wrap">
+    <div class="flex flex-wrap gap-2">
       <!-- <HeroButton class="size-8">
     <IconShare2 class="size-5" />
   </HeroButton> -->
 
       <HeroButton aria-label="btn-theme" id="toggle-theme" class="size-8">
         <IconSun class="size-5 dark:hidden" />
-        <IconMoon class="size-5 hidden dark:inline" />
+        <IconMoon class="hidden size-5 dark:inline" />
       </HeroButton>
 
       <div class="">
         <LanguagePicker />
       </div>
+
+      <Tooltip tooltip="Logout">
+        <HeroButton
+          aria-label="btn-logout"
+          id="logout-btn"
+          class="hidden size-8"
+        >
+          <i class="bx bx-log-out bx-sm"></i>
+        </HeroButton>
+      </Tooltip>
     </div>
   </div>
 </div>
+
+<script type="module">
+  import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const supabaseUrl = "https://qudlxlryegnainztkrtk.supabase.co";
+    const supabaseAnonKey =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF1ZGx4bHJ5ZWduYWluenRrcnRrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI2MzUwMTMsImV4cCI6MjA2ODIxMTAxM30.pAWMWGUCK48Lujssi3Ip4GUm11TZDmaNCINqX3q2m5o";
+
+    const supabase = createClient(supabaseUrl, supabaseAnonKey);
+    const logoutBtn = document.getElementById("logout-btn");
+
+    // Check initial auth state
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) {
+        logoutBtn.classList.remove("hidden");
+      }
+    });
+
+    // Listen for auth changes
+    supabase.auth.onAuthStateChange((event, session) => {
+      if (event === "SIGNED_IN" && session) {
+        logoutBtn.classList.remove("hidden");
+      } else if (event === "SIGNED_OUT") {
+        logoutBtn.classList.add("hidden");
+      }
+    });
+
+    // Add logout functionality
+    logoutBtn.addEventListener("click", async () => {
+      await supabase.auth.signOut();
+    });
+  });
+</script>

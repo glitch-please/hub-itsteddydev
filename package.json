@@ -12,7 +12,7 @@
   "dependencies": {
     "@astrojs/tailwind": "^6.0.2",
     "@fontsource-variable/outfit": "^5.2.6",
-    "@supabase/supabase-js": "^2.51.0",
+    "@supabase/supabase-js": "^2.52.1",
     "astro": "^5.11.1",
     "boxicons": "^2.1.4",
     "flowbite": "^3.1.2",
